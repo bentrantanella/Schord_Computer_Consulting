@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(function(){
+		$("#comhead").load("HomePage.html #comhead");
+	})
+	</script>
+	
+
+    <link href="HomePageStyles.css" rel="stylesheet" type="text/css">
+    <link href="ProjectsPageStyles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="comhead"></div>
+	
+	<div>
+		<img id="binbg" src="BinaryBackgroundFixed.png" width="1300" height="731" alt=""/>
+		<h1 id="projectshead">Projects</h1>
+		<div class="projectsp"> 
+			<b> <center> Royal Road Genetic Algorithm </center> </b> <br>
+
+
+			<b> INTRODUCTION: </b> <br>
+			&nbsp;&nbsp;&nbsp;&nbsp; The goal of this project was to replicate a genetic algorithm designed to find optimal strings of characters. The basis for this effort was a paper by Mitchell et. al., <a href="Mitchell-RR.pdf" target="_blank"> 'The Royal Road for Genetic Algorithms: Fitness Landscapes and GA Performance'</a>. In computer science, a genetic algorithm is a method of optimization that uses techniques found in nature to solve problems through basic forms of learning. In the paper, the authors outline a way of generating, processing, and scoring schemas, which are sixty-four bit strings of either a "1", or another character (represented by a "*"). To evaluate the different schemas, the authors created a scoring system based on the runs of 1s in each string, as shown in the table below. In this project, we examined the use of the Royal Road technique to iterate pairs of random schema in an efficient manner until we generate the ideal schema, s15. <br> <br>
+			<font class="codefont">
+			s1 = 11111111********************************************************; c1 = 8 <br>
+			s2 = ********11111111************************************************; c2 = 8 <br>
+			s3 = ****************11111111****************************************; c3 = 8 <br>
+			s4 = ************************11111111********************************; c4 = 8 <br>
+			s5 = ********************************11111111************************; c5 = 8 <br>
+			s6 = ****************************************11111111****************; c6 = 8 <br>
+			s7 = ************************************************11111111********; c7 = 8 <br>
+			s8 = ********************************************************11111111; c8 = 8 <br>
+			s9 = 1111111111111111************************************************; c9 = 16 <br>
+			s10 =****************1111111111111111********************************; c10 = 16 <br>
+			s11 =********************************1111111111111111****************; c11 = 16 <br>
+			s12 =************************************************1111111111111111; c12 = 16 <br>
+			s13 =11111111111111111111111111111111********************************; c13 = 32 <br>
+			s14 =********************************11111111111111111111111111111111; c14 = 32 <br>
+			s15 =1111111111111111111111111111111111111111111111111111111111111111; c15 = 64 <br> <br>
+			</font>
+
+			Where "s" is the schema being matched and "c" is the score given. For example the following schema would score 40 points due to it matching s1, s3, s4, and s10: <br>
+			<font class="codefont"> 11111111********1111111111111111******************************** </font> <br> <br>
+
+
+			<b> APPROACH: </b> <br>
+			&nbsp;&nbsp;&nbsp;&nbsp; To solve this problem, I created an algorithm that started with a set of 128 schemas, each 64 bits long, then processed them to create new generations through parent crossovers and random mutations, with the end result being the ideal schema, s15, or one that contains sixty-four 1s. Each of the 128 schemas was randomly generated with each bit in the schemas having a 50% chance of either being a 1 or a *. The algorithm then followed the following pseudocode for creating each next generation until a generation contained the ideal schema. <br> <br>
+
+			<font class="codefont">
+			pick parents p1 and p2 from previous generation <br>
+			with probability crossover_probability: <br>
+			&nbsp;&nbsp;&nbsp;&nbsp; generate c1 and c2 as p1xp2 and p2xp1 <br>
+			else <br>
+			&nbsp;&nbsp;&nbsp;&nbsp; c1 = p1.copy() <br>
+			&nbsp;&nbsp;&nbsp;&nbsp; c2 = p2.copy() <br>
+			<br>
+			c1 = c1.mutate() <br>
+			c2 = c2.mutate() <br>
+			<br>
+			</font>
+			&nbsp;&nbsp;&nbsp;&nbsp; I was most interested in how quickly the different types of parent crossovers - single point, double point, and uniform - reached the goal state, s15. A very good explanation of the different crossovers is presented in this article. Suffice to say, single- and double-point crossovers use one or two large chunks of each parent, respectively, to create the child, whereas uniform crossover uses individual bits from each parent in random fashion. <br>
+
+			&nbsp;&nbsp;&nbsp;&nbsp; To test all of these crossovers, I set up a simulation that consisted of thirty runs, with each run consisting of 100 trial runs of the genetic algorithm, each using one of the three crossover types, for a total of 300 trials per run. Each trial ended once a generation contained the target schema, and the number of generations it took to reach it was recorded. In each run, the average number of generations it took was recorded for each crossover type, as well as the maximum and minimum number of generations it took each of the crossovers to finish in the run. This is the data that is graphed below. <br>
+
+			<img src="GA_AvgGens2.png" width="640" height="480" alt=""/> <br>
+			<font class="codefont"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 1</font> <br>
+
+			<img src="GA_MaxGens2.png" width="640" height="480" alt=""/> <br>
+			<font class="codefont"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 2</font> <br>
+
+			<img src="GA_MinGens2.png" width="640" height="480" alt=""/> <br>
+			<font class="codefont"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 3</font> <br> <br>
+
+			<b> CONCLUSIONS: </b> <br>
+
+			&nbsp;&nbsp;&nbsp;&nbsp; Based on the data collected, it is clear the uniform crossover requires the most number of generations to achieve the target schema, whereas single and double crossovers achieve the target in nearly half the generations, on average. All three crossovers, though, generate similar values for maximum and minimum generations required to reach the target schema. <br>
+			&nbsp;&nbsp;&nbsp;&nbsp; These results make sense in this context as the scoring algorithm should favor single- and double-point crossover. Scoring is heavily dependent on long sections of the string to be the same, and these types of crossover randomly swap sections of the parents to create the children, while uniform randomly swaps each individual bit from the parents to create the children, usually ruining the long sections of '1s' needed to increase the score. <br> <br>
+		 </div>
+	</div>
+
+</body>
+</html>

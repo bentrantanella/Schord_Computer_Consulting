@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(function(){
+		$("#comhead").load("HomePage.html #comhead");
+	})
+	</script>
+	
+
+    <link href="HomePageStyles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="comhead"></div>
+	
+	<h1 id="heading"> <center> General Race Pace Calculator </center> </h1>
+	<p id="p"> <center> 
+		This calculator takes in a race distance and time, and returns the per-mile and per-kilometer pace that you would need to run the time <br> (Distances in meters)
+	</center> </p>
+	
+	<p class="input"> <center> 
+		Race Distance: (meters)
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Desired Time: (min:sec)
+	</center> </p>
+	
+	<center>
+	<input type="number" name="start_dist" id="start_dist">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="text" name="start_time" id="start_time">
+	<br> <br>
+	<button name="convert" onclick="getOutput();"> Convert</button>
+	<br>
+	<p class="output1"> </p>
+	<p class="output2"> </p>
+	</center>
+	
+	<script type="text/javascript">
+	function getOutput() {
+		const startDist = document.getElementById("start_dist").value
+		const startTime = document.getElementById("start_time").value
+		
+		const output1 = document.querySelector(".output1");
+		let out1 = "Pace per kilometer: " + timeToKMPace(startTime, startDist)
+		output1.textContent = out1;
+		
+		const output2 = document.querySelector(".output2");
+		let out2 = "Pace per mile: " + timeToMilePace(startTime, startDist)
+		output2.textContent = out2;
+
+	}	
+	
+	function timeToKMPace(startTime, startDist) {
+		let timeInSec = timeToSec(startTime);
+		let distInKM = startDist / 1000;
+
+		let secPerKM = timeInSec / distInKM;
+		return secToTime(secPerKM);
+	}
+
+	function timeToMilePace(startTime, startDist) {
+		let timeInSec = timeToSec(startTime);
+		let distInMiles = startDist / 1609;
+
+		let secPerMile = timeInSec / distInMiles;
+		return secToTime(secPerMile)
+	}
+
+	function timeToSec(time) {
+		timeStrs = time.split(":");
+		let timeNums = [];
+		for(let i = 0; i < timeStrs.length; i++) {
+			timeNums.push(Number(timeStrs[i]));
+		}
+		totalSec = (timeNums[0] * 60) + timeNums[1];
+		return totalSec;
+	}
+
+	function secToTime(sec) {
+		let minutes = Math.floor(sec / 60);
+		let seconds = sec % 60;
+		if (seconds < 10) {
+			return String(minutes) + ":0" + seconds.toFixed(2);
+		} else {
+			return String(minutes) + ":" + seconds.toFixed(2);
+		}
+
+	}
+	
+	</script>
+
+</body>
+</html>

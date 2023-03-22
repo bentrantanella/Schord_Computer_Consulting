@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(function(){
+		$("#comhead").load("HomePage.html #comhead");
+	})
+	</script>
+	
+
+    <link href="HomePageStyles.css" rel="stylesheet" type="text/css">
+    <link href="ConversionCalcStyles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="comhead"></div>
+	
+	
+	<h1> <center> Race Conversion Calculator </center></h1>
+	<p id="p"> <center> This calculator takes in a race distance and time and converts it to a desired race distance <br> (Distances in meters) </center> </p>
+	
+
+	<p class="input"> <center>
+		Race 1 Distance: (meters)
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Race 1 Time: (min:sec)
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Race 2 Distance: (meters)
+	</center> </p>
+	
+	<center> 
+	<input type="number" name="start_dist" id="start_dist" required>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="text" name="start_time" id="start_time" required>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="number" name="end_dist" id="end_dist" required>
+	<br> <br>
+	<button name="convert" onclick="conversion();"> Convert </button>
+	<br>
+	<p class="output"> </p>
+	</center>
+	
+	<script type="text/javascript">
+		
+		function conversion() {
+			const startDist = document.getElementById("start_dist").value
+			const startTime = document.getElementById("start_time").value
+			const endDist = document.getElementById("end_dist").value
+			let startTimeinSec = timeToSec(startTime);
+			let metersPerSec = startDist / startTimeinSec;
+
+			let endTime = Math.floor(endDist / metersPerSec);
+			
+			const output = document.querySelector(".output")
+			let out = secToTime(endTime);
+			output.textContent = "Estimated Race 2 Time: " + out;
+		}
+
+		function timeToSec(time) {
+			timeStrs = time.split(":");
+			let timeNums = [];
+			for(let i = 0; i < timeStrs.length; i++) {
+				timeNums.push(Number(timeStrs[i]));
+			}
+			totalSec = (timeNums[0] * 60) + timeNums[1];
+			return totalSec;
+		}
+
+		function secToTime(sec) {
+			let minutes = Math.floor(sec / 60);
+			let seconds = sec % 60;
+			if (seconds < 10) {
+				return String(minutes) + ":0" + String(seconds);
+			} else {
+				return String(minutes) + ":" + String(seconds);
+			}
+
+		}
+	
+	</script>
+
+	
+</body>
+</html>

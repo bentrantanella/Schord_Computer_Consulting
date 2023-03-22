@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+#contacthead {
+	position: absolute;
+	top: 220px;
+	left: 200px;
+	font-size: 50pt;
+}
+
+#contactp {
+	position: absolute;
+	top: 400px;
+	left: 45%;
+	background-color: #FFFFFF;
+	font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", serif;
+	border-width: thick;
+	border-style: solid;
+	font-size: 30pt;
+}
+
+#selfimg {
+	position: absolute;
+	left: 13%;
+	top: 400px;
+	border-width: thick;
+	border-style: solid;
+}
+
+#emailimg {
+	position: absolute;
+	left: 40%;
+	top: 400px;
+	
+	border-width: thick;
+	border-style: solid;
+}
+
+#contactlink {
+	color: black;
+	position: absolute;
+	top: 475px;
+	left: 45%;
+	background-color: #FFFFFF;
+	font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", serif;
+	border-width: thick;
+	border-style: solid;
+	font-size: 30pt;
+}
+
+#contactlink:hover {
+	color:cornflowerblue;
+}
+
+#linkedimg {
+	position: absolute;
+	left: 40%;
+	top: 475px;
+	
+	border-width: thick;
+	border-style: solid;
+}
+
+
+

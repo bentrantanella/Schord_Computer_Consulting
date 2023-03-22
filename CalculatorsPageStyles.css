@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+#calcshead {
+	position: absolute;
+	top: 220px;
+	left: 200px;
+	font-size: 50pt;
+}
+
+.calcsp {
+	position: absolute;
+	background-color: #FFFFFF;
+	font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", serif;
+	border-width: thick;
+	border-style: solid;
+	font-size: 20pt;
+}
+
+#calcintro {
+    top: 55%;
+    margin-left: 13%;
+    margin-right: 4%;
+	padding-left: 3px;
+}
+
+#calclink1 {
+	
+    top: 90%;
+	left: 20%;
+	padding-left: 3px;
+	padding-right: 3px;
+	line-height: 40%;
+	padding-top: 10px;
+    padding-bottom: 3px;
+}
+
+#calclink2 {
+	top: 90%;
+	left: 45%;
+	padding-left: 3px;
+	padding-right: 3px;
+	line-height: 40%;
+	padding-top: 10px;
+    padding-bottom: 3px;
+}
+
+#calclink3 {
+	top: 90%;
+	left: 80%;
+	padding-left: 3px;
+	padding-right: 3px;
+	line-height: 40%;
+	padding-top: 10px;
+    padding-bottom: 3px;
+}
+
+.label {
+    font-size: 10pt;
+	
+}

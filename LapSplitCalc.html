@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(function(){
+		$("#comhead").load("HomePage.html #comhead");
+	})
+	</script>
+	
+
+    <link href="HomePageStyles.css" rel="stylesheet" type="text/css">
+    <link href="LapSplitCalcStyles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="comhead"></div>
+	
+	<h1 id="heading"> <center> Lap Split Calculator </center> </h1>
+	<p id="p"> <center> 
+		This calculator takes in a race distance, goal time, and length of the track, and outputs the average lap time as well as the time you should see on the clock each time passing by the finish line
+	</center> </p>
+	
+	<p class="input"> <center> 
+		Race Distance: (meters)
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Desired Time: (min:sec)
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Track Size: (meters)
+	</center> </p>
+	
+	<center>
+	<input type="number" name="start_dist" id="start_dist">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="text" name="start_time" id="start_time">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="number" name="lap_length" id="lap_length">
+	<br> <br>
+	<button name="convert" onclick="lapSplitCalc();"> Convert</button>
+	<br>
+	<p class="output1"> </p>
+	<p class="output2"> </p>
+	<p class="output3"> </p>
+	</center>
+	
+	<script type="text/javascript">
+	
+	function lapSplitCalc() {
+		const startDist = document.getElementById("start_dist").value
+		const startTime = document.getElementById("start_time").value
+		const trackSize = document.getElementById("lap_length").value
+		
+    	let timeInSec = timeToSec(startTime);
+    	let numLaps = startDist / trackSize;
+    
+    
+
+		let secPerLap = timeInSec / numLaps;
+		let timePerLap = secToTime(secPerLap);
+
+		let runningTot = timeInSec;
+		let timesList = [];
+		while (runningTot >= secPerLap) {
+			timesList.push(secToTime(runningTot));
+			runningTot -= secPerLap;
+		}
+
+		if (runningTot > 0) {
+			timesList.push(secToTime(runningTot));
+		}
+
+		let timesAtLaps = "";
+		for (let i = timesList.length - 1; i >= 0; i--) {
+			timesAtLaps += timesList[i];
+			if (i > 0) {
+				timesAtLaps += ", "
+			}
+		}
+		
+		const output1 = document.querySelector(".output1");
+		let out1 = "Time per lap: " + timePerLap;
+		output1.textContent = out1;
+		
+		const output2 = document.querySelector(".output2");
+		let out2 = "Number of laps: " + numLaps.toFixed(2);
+		output2.textContent = out2;
+		
+		const output3 = document.querySelector(".output3");
+		let out3 = "Clock time when crossing finish line each lap: " + timesAtLaps;
+		output3.textContent = out3;
+	}
+
+
+	function timeToSec(time) {
+		timeStrs = time.split(":");
+		let timeNums = [];
+		for(let i = 0; i < timeStrs.length; i++) {
+			timeNums.push(Number(timeStrs[i]));
+		}
+		totalSec = (timeNums[0] * 60) + timeNums[1];
+		return totalSec;
+	}
+
+	function secToTime(sec) {
+		let minutes = Math.floor(sec / 60);
+		let seconds = sec % 60;
+		if (seconds < 10) {
+			return String(minutes) + ":0" + seconds.toFixed(2);
+		} else {
+			return String(minutes) + ":" + seconds.toFixed(2);
+		}
+
+	}
+	</script>
+		
+		
+	
+	
+</body>
+</html>

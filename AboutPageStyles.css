@@ -1,0 +1,32 @@
+@charset "UTF-8";
+#binbg {
+	position: relative;
+}
+
+#aboutp {
+	position: absolute;
+	top: 350px;
+	left: 200px;
+	margin-right: 90px;
+	background-color: #FFFFFF;
+	font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", serif;
+	border-width: thick;
+	border-style: solid;
+	font-size: 18pt;
+}
+
+#abouthead {
+	position: absolute;
+	top: 220px;
+	left: 200px;
+	font-size: 50pt;	
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(function(){
+		$("#comhead").load("HomePage.html #comhead");
+	})
+	</script>
+	
+
+    <link href="HomePageStyles.css" rel="stylesheet" type="text/css">
+    <link href="CalculatorsPageStyles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="comhead"></div>
+	
+	<div>
+		<img id="binbg" src="BinaryBackgroundFixed.png" width="1300" height="731" alt=""/>
+		
+		<h1 id="calcshead">Calculators</h1>
+		<p class="calcsp" id="calcintro"> 
+			Welcome to our calculator page, where we offer free web-based running and racing tools for you to use. No registration necessary, just calculate and get going! These are all fairly straightforward, but if you have any questions, or if there is a calculator you'd like us to develop, send us an email at <a href="mailto: info@schordcomputerconsuling.com"> info@schordcomputerconsulting.com</a>
+		</p>
+		
+		<div class="calcsp" id="calclink1">
+			<center> <a href="LapSplitCalc.html"> <img src="LSCLogo.png" width="80" height="80" alt=""/> </a> </center>
+			<a href="LapSplitCalc.html"> Lap Split Calculator</a>
+			<br> 
+			<br>
+			<center> <p class="label"> Input the race distance, desired time,<br> and track size <br><br> Returns target lap splits</p> </center>
+	  </div>
+		
+		<div class="calcsp" id="calclink2">
+			<center> <a href="ConversionCalc.html"> <img src="RCCLogo.png" width="80" height="80" alt="" /> </a> </center>
+			<a href="ConversionCalc.html"> Race Conversion Calculator </a>
+			<br> 
+			<br>
+			<center> <p class="label"> Input race distance with time, along with <br> a second race distance<br> <br> Returns estimated time to complete second race <br> based on pace of the first </p></center>
+	  </div>
+		
+		<div class="calcsp" id="calclink3">
+			<center> <a href="PaceCalc.html"> <img src="PCLogo.png" width="80" height="80" alt=""/> </a> </center>
+			<a href="PaceCalc.html"> Pace Calculator</a>
+			<br> 
+			<br>
+			<center> <p class="label"> Input a race time and distance <br> <br> Returns required pace per <br> kilometer and pace per mile</p></center>
+	  </div>
+		
+	</div>
+
+<footer class="tagline"> Schord Computer Consulting </footer>
+</body>
+</html>
